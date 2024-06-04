@@ -1,8 +1,19 @@
 
+import Banner from "../Banner/Banner";
+import Faq from "../Faq/Faq";
+import Featured from "../Featured/Featured";
+import Work from "../HowItsWork/Work";
+import LatestSurvey from "../LatestSurvey/LatestSurvey";
+// import Featured from "./Featured/Featured";
+
 const Home = () => {
     return (
         <div>
-           <h2>This is Home</h2> 
+           <Banner></Banner>
+           <Featured></Featured>
+           <LatestSurvey></LatestSurvey>
+           <Work></Work>
+           <Faq></Faq>
         </div>
     );
 };

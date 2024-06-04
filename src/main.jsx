@@ -9,7 +9,7 @@ import { router } from './Routes/Router';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className='max-w-[1440px] mx-auto'>
+    <div className='max-w-[1440px] mx-auto my-6'>
     <RouterProvider router={router} />
     </div>
   </React.StrictMode>
