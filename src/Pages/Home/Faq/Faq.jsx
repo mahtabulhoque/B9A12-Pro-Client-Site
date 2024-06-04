@@ -3,10 +3,10 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 const Faq = () => {
     return (
-        <section className="p-8 bg-base-200 my-8">
+        <section className="my-8">
             <SectionTitle heading="FAQs" />
 
-            <div className="container mx-auto">
+            <div className="container p-8 bg-base-200 mx-auto rounded-xl">
                 <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-2">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium">

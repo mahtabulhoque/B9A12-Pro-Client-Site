@@ -1,30 +1,39 @@
-const Navbar = () => {
-const navOption = <>
-     <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+import { Link } from "react-router-dom";
 
-</>
+const Navbar = () => {
+  const navOption = (
+    <>
+      <li>
+        <Link to="/" className="text-lg lg:text-2xl lg:font-medium">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/surveys" className="text-lg lg:text-2xl lg:font-medium">
+          Surveys
+        </Link>
+      </li>
+      <li>
+        <Link to="/survey-details" className="text-lg lg:text-2xl lg:font-medium">
+          Survey Details
+        </Link>
+      </li>
+      <li>
+        <Link to="/price" className="text-lg lg:text-2xl lg:font-medium">
+          Price
+        </Link>
+      </li>
+      <li>
+        <Link to="/register" className="text-lg lg:text-2xl lg:font-medium">
+          Register Here
+        </Link>
+      </li>
+    </>
+  );
 
   return (
     <>
-      <div className="navbar fixed z-10 bg-opacity-35 bg-base-200 max-w-[1440px]">
+      <div className="navbar fixed z-10 bg-opacity-75 bg-base-200 max-w-[1440px]">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,15 +56,13 @@ const navOption = <>
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-            {navOption}
+              {navOption}
             </ul>
           </div>
-          <a className="btn btn-ghost text-4xl font-bold">Pro Survey</a>
+          <a className="text-sky-600 text-5xl font-bold">Pro Survey</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-          {navOption}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navOption}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
