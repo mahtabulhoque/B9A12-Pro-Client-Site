@@ -1,5 +1,6 @@
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import image from "../../../../public/4.jpg";
+import { Link } from "react-router-dom";
 
 const Work = () => {
   return (
@@ -52,7 +53,9 @@ const Work = () => {
             </div>
 
             <div className="mt-8">
+              <Link to='/register'>
               <button className="btn">Get Started</button>
+              </Link>
             </div>
           </div>
         </div>
