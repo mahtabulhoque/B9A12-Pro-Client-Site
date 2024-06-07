@@ -8,6 +8,7 @@ import SurveyDetails from "../Pages/SurveysDetails/SurveyDetails";
 import Pricing from "../Pages/Pricing/Pricing";
 import Register from "../Pages/Register/Register";
 import LogIn from "../Pages/LogIn/LogIn";
+import DashBoard from "../Layout/DashBoard/DashBoard";
 
  export const router = createBrowserRouter([
     {
@@ -54,4 +55,14 @@ import LogIn from "../Pages/LogIn/LogIn";
         },
       ]
     },
+
+    {
+      path:'dashboard',
+      element:<DashBoard></DashBoard>,
+      children:[
+        {
+          
+        }
+      ]
+    }
   ]);

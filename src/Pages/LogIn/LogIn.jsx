@@ -1,19 +1,23 @@
-import { useContext, useEffect,useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
+// Import SweetAlert2
+import { FaGoogle } from "react-icons/fa";
 
 const LogIn = () => {
-  
   const [disable, setDisable] = useState(true);
-  const { logIn } = useContext(AuthContext);
+  const { logIn, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -27,13 +31,13 @@ const LogIn = () => {
     logIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
-      // Show SweetAlert on successful login
       Swal.fire({
         icon: "success",
         title: "Logged in successfully!",
         showConfirmButton: false,
-        timer: 1500, // Automatically close after 1.5 seconds
+        timer: 1500,
       });
+      navigate(from, { replace: true });
     });
   };
 
@@ -44,6 +48,27 @@ const LogIn = () => {
     } else {
       setDisable(true);
     }
+  };
+
+  const handleGoogleLogIn = () => {
+    signInWithGoogle()
+      .then(() => {
+        navigate(from, { replace: true });
+        // Show success message with SweetAlert
+        Swal.fire({
+          icon: "success",
+          title: "Google Login Successful",
+          text: "You have successfully logged in with Google!",
+        });
+      })
+      .catch((error) => {
+        // Show error message with SweetAlert
+        Swal.fire({
+          icon: "error",
+          title: "Google Login Error",
+          text: error.message, // You can customize this message based on your error handling
+        });
+      });
   };
 
   return (
@@ -106,9 +131,8 @@ const LogIn = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
-                 onBlur={handleValidateCaptcha}
+                  onBlur={handleValidateCaptcha}
                   type="text"
-                  
                   name="captcha"
                   placeholder="type the captcha"
                   className="input input-bordered"
@@ -136,6 +160,11 @@ const LogIn = () => {
                   Create an account
                 </Link>
               </small>
+            </div>
+            <div className="">
+              <button onClick={handleGoogleLogIn} className="btn btn-google m-4 btn-primary">
+                <FaGoogle className="mr-2" /> Sign in with Google
+              </button>
             </div>
           </div>
           <div className="text-center text-3xl text-white mt-4">
