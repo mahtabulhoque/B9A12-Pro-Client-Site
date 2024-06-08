@@ -3,7 +3,7 @@
 const SurveyDetails = () => {
     return (
         <div>
-            <h1>Survey Details</h1>
+            <h1>surveydetails</h1>
         </div>
     );
 };

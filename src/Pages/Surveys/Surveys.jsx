@@ -1,8 +1,9 @@
 
+
 const Surveys = () => {
     return (
         <div>
-            <h1>HIII</h1>
+            <h1>Surveys</h1>
         </div>
     );
 };

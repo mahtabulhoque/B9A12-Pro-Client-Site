@@ -38,6 +38,11 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
+        <Link to="/dashboard" className="text-lg lg:text-2xl lg:font-medium">
+          Dashboard
+        </Link>
+      </li>
+      <li>
         <Link to="/register" className="text-lg lg:text-2xl lg:font-medium">
           Register Here
         </Link>

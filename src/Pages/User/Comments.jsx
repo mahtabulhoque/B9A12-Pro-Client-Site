@@ -1,6 +1,5 @@
 
-
-const SurveyCreate = () => {
+const Comments = () => {
     return (
         <div>
             
@@ -8,4 +7,4 @@ const SurveyCreate = () => {
     );
 };
 
-export default SurveyCreate;
+export default Comments;

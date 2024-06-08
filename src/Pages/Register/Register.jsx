@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import registrationImage from "../../../public/registration.jpg"; // Adjust the import path based on your project structure
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 const Register = () => {
+  const axiosPublic = UseAxiosPublic();
+
   const {
     register,
     handleSubmit,
@@ -19,55 +22,59 @@ const Register = () => {
   const navigate = useNavigate();
 
   const validatePassword = (value) => {
-    return (
-      value.length >= 8 &&
-      /[A-Z]/.test(value) &&
-      /[0-9]/.test(value)
-    );
+    return value.length >= 8 && /[A-Z]/.test(value) && /[0-9]/.test(value);
   };
 
   const onSubmit = (data) => {
     // Perform password validation
     if (!validatePassword(data.password)) {
       Swal.fire({
-        icon: 'error',
-        title: 'Invalid Password',
-        text: 'Password must be at least 8 characters long and include at least one uppercase letter and one number.',
+        icon: "error",
+        title: "Invalid Password",
+        text: "Password must be at least 8 characters long and include at least one uppercase letter and one number.",
       });
       return;
     }
 
     // Register the user
     createUser(data.email, data.password)
-      .then(result => {
+      .then((result) => {
         const loggedUser = result.user;
+        console.log(loggedUser);
         // Update user profile
         update(data.name)
           .then(() => {
-            console.log('profile updated');
-            reset();
-            // Show success message with SweetAlert
-            Swal.fire({
-              icon: 'success',
-              title: 'Registration Successful',
-              text: 'You have successfully registered!',
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                // Show success message with SweetAlert
+                Swal.fire({
+                  icon: "success",
+                  title: "Registration Successful",
+                  text: "You have successfully registered!",
+                });
+                navigate("/");
+              }
             });
-            navigate('/')
           })
-          .catch(error => {
+          .catch((error) => {
             // Show error message with SweetAlert
             Swal.fire({
-              icon: 'error',
-              title: 'Profile Update Error',
+              icon: "error",
+              title: "Profile Update Error",
               text: error.message, // You can customize this message based on your error handling
             });
           });
       })
-      .catch(error => {
+      .catch((error) => {
         // Show error message with SweetAlert
         Swal.fire({
-          icon: 'error',
-          title: 'Registration Error',
+          icon: "error",
+          title: "Registration Error",
           text: error.message, // You can customize this message based on your error handling
         });
       });
@@ -111,7 +118,9 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-                {errors.name && <span className="text-red-800">Name is required</span>}
+                {errors.name && (
+                  <span className="text-red-800">Name is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -143,14 +152,24 @@ const Register = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <input className="btn btn-primary" type="submit" value='Register' />
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Register"
+                />
               </div>
             </form>
-            <p className="text-center p-4"><small>Already have an account? <Link className="text-blue-600" to="/login">LogIn</Link></small></p>
+            <p className="text-center p-4">
+              <small>
+                Already have an account?{" "}
+                <Link className="text-blue-600" to="/login">
+                  LogIn
+                </Link>
+              </small>
+            </p>
           </motion.div>
         </div>
       </div>
-
     </>
   );
 };

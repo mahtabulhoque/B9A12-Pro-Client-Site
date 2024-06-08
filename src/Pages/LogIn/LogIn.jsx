@@ -11,8 +11,13 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 // Import SweetAlert2
 import { FaGoogle } from "react-icons/fa";
+import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 const LogIn = () => {
+
+  const axiosPublic = UseAxiosPublic();
+
+
   const [disable, setDisable] = useState(true);
   const { logIn, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -52,7 +57,17 @@ const LogIn = () => {
 
   const handleGoogleLogIn = () => {
     signInWithGoogle()
-      .then(() => {
+      .then(result => {
+        console.log(result.user);
+        const userInfo = {
+          email:result.user?.email,
+          name: result.user?.displayName
+        }
+        axiosPublic.post('/users', userInfo)
+        .then(res => {
+          console.log(res.data);
+        })
+
         navigate(from, { replace: true });
         // Show success message with SweetAlert
         Swal.fire({
