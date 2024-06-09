@@ -1,11 +1,10 @@
 
-
 const Surveys = () => {
-    return (
-        <div>
-            <h1>Surveys</h1>
-        </div>
-    );
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default Surveys;

@@ -60,16 +60,17 @@ const LogIn = () => {
       .then(result => {
         console.log(result.user);
         const userInfo = {
-          email:result.user?.email,
+          email: result.user?.email,
           name: result.user?.displayName
-        }
+        };
         axiosPublic.post('/users', userInfo)
-        .then(res => {
-          console.log(res.data);
-        })
-
+          .then(res => {
+            console.log('Server response:', res.data);
+          })
+          .catch(error => {
+            console.error('Error storing user info:', error);
+          });
         navigate(from, { replace: true });
-        // Show success message with SweetAlert
         Swal.fire({
           icon: "success",
           title: "Google Login Successful",
@@ -77,14 +78,14 @@ const LogIn = () => {
         });
       })
       .catch((error) => {
-        // Show error message with SweetAlert
         Swal.fire({
           icon: "error",
           title: "Google Login Error",
-          text: error.message, // You can customize this message based on your error handling
+          text: error.message,
         });
       });
   };
+  
 
   return (
     <>
