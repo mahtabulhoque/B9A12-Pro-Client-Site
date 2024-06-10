@@ -30,7 +30,6 @@ const ManageUsers = () => {
         {/* head */}
         <thead>
           <tr>
-            <th>ID</th>
             <th>Email</th>
             <th>Role</th>
             <th>Status</th>

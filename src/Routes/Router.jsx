@@ -11,11 +11,13 @@ import DashBoard from "../Layout/DashBoardLayout/DashBoard";
 import CreateSurvey from "../Pages/DashBoard/Surveyor/CreateSurvey";
 import Common from "../Pages/DashBoard/User/Common";
 import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -48,6 +50,7 @@ export const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <DashBoard></DashBoard>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index:true,
