@@ -63,7 +63,7 @@ const LogIn = () => {
           email: result.user?.email,
           name: result.user?.displayName
         };
-        axiosPublic.post('/users', userInfo)
+        axiosPublic.put('/users', userInfo)
           .then(res => {
             console.log('Server response:', res.data);
           })

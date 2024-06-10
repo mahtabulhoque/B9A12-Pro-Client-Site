@@ -6,11 +6,8 @@ import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 const Register = () => {
-  const axiosPublic = UseAxiosPublic();
-
   const {
     register,
     handleSubmit,
@@ -25,59 +22,42 @@ const Register = () => {
     return value.length >= 8 && /[A-Z]/.test(value) && /[0-9]/.test(value);
   };
 
-  const onSubmit = (data) => {
-    // Perform password validation
-    if (!validatePassword(data.password)) {
-      Swal.fire({
-        icon: "error",
-        title: "Invalid Password",
-        text: "Password must be at least 8 characters long and include at least one uppercase letter and one number.",
-      });
-      return;
-    }
-
-    // Register the user
-    createUser(data.email, data.password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        // Update user profile
-        update(data.name)
-          .then(() => {
-            const userInfo = {
-              name: data.name,
-              email: data.email,
-            };
-            axiosPublic.post("/users", userInfo).then((res) => {
-              if (res.data.insertedId) {
-                reset();
-                // Show success message with SweetAlert
-                Swal.fire({
-                  icon: "success",
-                  title: "Registration Successful",
-                  text: "You have successfully registered!",
-                });
-                navigate("/");
-              }
-            });
-          })
-          .catch((error) => {
-            // Show error message with SweetAlert
-            Swal.fire({
-              icon: "error",
-              title: "Profile Update Error",
-              text: error.message, // You can customize this message based on your error handling
-            });
-          });
-      })
-      .catch((error) => {
-        // Show error message with SweetAlert
+  const onSubmit = async (data) => {
+    try {
+      // Perform password validation
+      if (!validatePassword(data.password)) {
         Swal.fire({
           icon: "error",
-          title: "Registration Error",
-          text: error.message, // You can customize this message based on your error handling
+          title: "Invalid Password",
+          text: "Password must be at least 8 characters long and include at least one uppercase letter and one number.",
         });
+        return;
+      }
+
+      // Register the user
+      const result = await createUser(data.email, data.password);
+      const loggedUser = result.user;
+      console.log(loggedUser);
+
+      // Update user profile
+      await update(data.name);
+
+      reset();
+      // Show success message with SweetAlert
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "You have successfully registered!",
       });
+      navigate("/");
+    } catch (error) {
+      // Show error message with SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Registration Error",
+        text: error.message,
+      });
+    }
   };
 
   return (
@@ -145,6 +125,9 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
+                {errors.password && (
+                  <span className="text-red-800">Password is required</span>
+                )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?

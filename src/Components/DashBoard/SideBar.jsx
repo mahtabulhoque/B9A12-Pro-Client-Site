@@ -1,8 +1,11 @@
 import { IoCreateOutline} from "react-icons/io5";
 import { FaRegEye,FaCreativeCommons,FaHome } from "react-icons/fa";
 import { NavLink} from "react-router-dom";
+import useRole from "../../Hooks/useRole";
 
 const SideBar = () => {
+    const [role, isLoading] = useRole();
+    console.log(role, isLoading);
   return (
     <div className="flex">
     {/* dashboard side bar */}
