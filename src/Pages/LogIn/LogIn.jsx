@@ -1,23 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-// Import SweetAlert2
 import { FaGoogle } from "react-icons/fa";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 const LogIn = () => {
-
   const axiosPublic = UseAxiosPublic();
-
-
   const [disable, setDisable] = useState(true);
   const { logIn, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -28,12 +20,14 @@ const LogIn = () => {
     loadCaptchaEnginge(6);
   }, []);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    logIn(email, password).then((result) => {
+    
+    try {
+      const result = await logIn(email, password);
       const user = result.user;
       console.log(user);
       Swal.fire({
@@ -43,7 +37,13 @@ const LogIn = () => {
         timer: 1500,
       });
       navigate(from, { replace: true });
-    });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Error",
+        text: error.message,
+      });
+    }
   };
 
   const handleValidateCaptcha = (e) => {
@@ -55,37 +55,29 @@ const LogIn = () => {
     }
   };
 
-  const handleGoogleLogIn = () => {
-    signInWithGoogle()
-      .then(result => {
-        console.log(result.user);
-        const userInfo = {
-          email: result.user?.email,
-          name: result.user?.displayName
-        };
-        axiosPublic.put('/users', userInfo)
-          .then(res => {
-            console.log('Server response:', res.data);
-          })
-          .catch(error => {
-            console.error('Error storing user info:', error);
-          });
-        navigate(from, { replace: true });
-        Swal.fire({
-          icon: "success",
-          title: "Google Login Successful",
-          text: "You have successfully logged in with Google!",
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Google Login Error",
-          text: error.message,
-        });
+  const handleGoogleLogIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      const res = await axiosPublic.put('/user', userInfo);
+      console.log('Server response:', res.data);
+      navigate(from, { replace: true });
+      Swal.fire({
+        icon: "success",
+        title: "Google Login Successful",
+        text: "You have successfully logged in with Google!",
       });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Google Login Error",
+        text: error.message,
+      });
+    }
   };
-  
 
   return (
     <>
@@ -94,7 +86,6 @@ const LogIn = () => {
       </Helmet>
 
       <div className="hero min-h-screen bg-cover bg-center relative overflow-hidden">
-        {/* Background Image Animation */}
         <motion.div
           initial={{ opacity: 0, x: "-100vw" }}
           animate={{ opacity: 1, x: 0 }}
@@ -102,11 +93,7 @@ const LogIn = () => {
           className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
           style={{ backgroundImage: 'url("login2.jpg")' }}
         />
-
-        {/* Hero Overlay */}
         <div className="hero-overlay bg-opacity-60"></div>
-
-        {/* Form Animation */}
         <motion.div
           initial={{ opacity: 0, x: "100vw" }}
           animate={{ opacity: 1, x: 0 }}
@@ -154,11 +141,6 @@ const LogIn = () => {
                   className="input input-bordered"
                   required
                 />
-                {/* <button
-                  className="btn btn-outline btn-xs my-2"
-                >
-                  Validate
-                </button> */}
               </div>
               <div className="form-control mt-6">
                 <input

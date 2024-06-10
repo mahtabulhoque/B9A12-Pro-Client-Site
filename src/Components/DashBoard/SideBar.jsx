@@ -1,7 +1,11 @@
-import { IoCreateOutline} from "react-icons/io5";
-import { FaRegEye,FaCreativeCommons,FaHome } from "react-icons/fa";
+
+import { FaCreativeCommons,FaHome } from "react-icons/fa";
 import { NavLink} from "react-router-dom";
 import useRole from "../../Hooks/useRole";
+import SurveyorMenu from "./Menu/SurveyorMenu";
+import UserMenu from "./Menu/UserMenu";
+import AdminMenu from "./Menu/AdminMenu";
+import ProUserMenu from "./Menu/ProUserMenu";
 
 const SideBar = () => {
     const [role, isLoading] = useRole();
@@ -16,20 +20,16 @@ const SideBar = () => {
                 <FaCreativeCommons />
                     Common</NavLink>
             </li>
-            <li>
-                <NavLink to="/dashboard/create">
-                   <IoCreateOutline />
-                    Create Survey</NavLink>
-            </li>
-            <li>
-                <NavLink to="/dashboard/surveys">
-                <FaRegEye />
-                  
-                    View</NavLink>
-            </li>
-           
-           
-           
+            {/* Admin Menu */}
+            {role === 'admin' && <AdminMenu></AdminMenu>}
+
+            {/* Surveyor Menu */}
+             {role === 'surveyor' && <SurveyorMenu></SurveyorMenu>}
+            
+            {/* user Menu */}
+            {role === 'user' && <UserMenu></UserMenu>}
+             {/* pro user */}
+            {role === 'pro-user' && <ProUserMenu></ProUserMenu>}
             <div className="divider"></div>
             <li>
                 <NavLink to="/">

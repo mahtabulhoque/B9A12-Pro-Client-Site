@@ -59,11 +59,12 @@ const AuthProvider = ({ children }) => {
   const saveUser = async (user) => {
     const currentUser = {
       email: user.email,
-      role: "guest",
+      name:user.name,
+      role: "surveyor",
       status: "Verified",
     };
     try {
-      const { data } = await axiosPublic.put("/users", currentUser);
+      const { data } = await axiosPublic.put("/user", currentUser);
       return data;
     } catch (error) {
       console.error("Error saving user:", error.message);

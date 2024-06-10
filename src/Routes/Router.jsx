@@ -10,6 +10,7 @@ import DashBoard from "../Layout/DashBoardLayout/DashBoard";
 
 import CreateSurvey from "../Pages/DashBoard/Surveyor/CreateSurvey";
 import Common from "../Pages/DashBoard/User/Common";
+import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "create",
         element: <CreateSurvey></CreateSurvey>,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },
