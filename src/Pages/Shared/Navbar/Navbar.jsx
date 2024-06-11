@@ -24,14 +24,7 @@ const Navbar = () => {
           Surveys
         </Link>
       </li>
-      <li>
-        <Link
-          to="/survey-details"
-          className="text-lg lg:text-2xl lg:font-medium"
-        >
-          Survey Details
-        </Link>
-      </li>
+  
       <li>
         <Link to="/price" className="text-lg lg:text-2xl lg:font-medium">
           Price

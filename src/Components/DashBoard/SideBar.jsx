@@ -21,15 +21,15 @@ const SideBar = () => {
                     Common</NavLink>
             </li>
             {/* Admin Menu */}
-            {role === 'admin' && <AdminMenu></AdminMenu>}
+            {role === 'Admin' && <AdminMenu></AdminMenu>}
 
             {/* Surveyor Menu */}
-             {role === 'surveyor' && <SurveyorMenu></SurveyorMenu>}
+             {role === 'Surveyor' && <SurveyorMenu></SurveyorMenu>}
             
             {/* user Menu */}
-            {role === 'user' && <UserMenu></UserMenu>}
+            {role === 'User' && <UserMenu></UserMenu>}
              {/* pro user */}
-            {role === 'pro-user' && <ProUserMenu></ProUserMenu>}
+            {role === 'Pro-user' && <ProUserMenu></ProUserMenu>}
             <div className="divider"></div>
             <li>
                 <NavLink to="/">
