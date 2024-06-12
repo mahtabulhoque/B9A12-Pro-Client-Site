@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const SurveyDetails = () => {
   const { id } = useParams(); // Use useParams to get the survey ID from the URL
@@ -33,15 +33,19 @@ const SurveyDetails = () => {
     return <p>No survey data available</p>;
   }
 
-  const { title, description } = data;
+  const { title, category, deadline, description,_id} = data;
 
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{title}</h2>
-        <p>{description}</p>
+        <h2 className="card-title">Title: {title}</h2>
+        <p>Category: {category}</p>
+        <p>Description: {description}</p>
+        <p>Deadline: {deadline}</p>
         <div className="card-actions">
-          <button className="btn btn-primary">Buy Now</button>
+         <Link to={`/votes/${_id}`}>
+         <button className="btn btn-primary">Vote</button>
+         </Link>
         </div>
       </div>
     </div>

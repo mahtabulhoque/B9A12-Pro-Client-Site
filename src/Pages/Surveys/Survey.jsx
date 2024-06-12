@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Survey = ({ survey }) => {
-  const { title, category, deadline, description, _id } = survey;
+  const { title, category, deadline, description, _id,voteCount,timestamp } = survey;
   console.log(survey);
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
@@ -10,6 +10,8 @@ const Survey = ({ survey }) => {
         <p>Description: {description}</p>
         <p>Category: {category}</p>
         <p>Deadline: {deadline}</p>
+        <p>VoteCount: {voteCount}</p>
+        <p>Creation: {timestamp}</p>
         <div className="card-actions">
           <Link to ={`/survey/${_id}`}>
           <button className="btn btn-primary">View Details</button>

@@ -1,9 +1,10 @@
+import { Outlet } from "react-router-dom";
 
 
 const UserDashBoard = () => {
     return (
         <div>
-            <h1>User</h1>
+           <Outlet></Outlet>
         </div>
     );
 };

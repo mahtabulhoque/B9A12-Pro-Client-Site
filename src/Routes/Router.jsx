@@ -12,6 +12,8 @@ import CreateSurvey from "../Pages/DashBoard/Surveyor/CreateSurvey";
 import Common from "../Pages/DashBoard/User/Common";
 import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Vote from "../Pages/Home/Featured/Vote";
+import View from "../Pages/DashBoard/Surveyor/View";
 
 export const router = createBrowserRouter([
   {
@@ -31,11 +33,16 @@ export const router = createBrowserRouter([
       {
         path: "/survey/:id",
         element: <SurveyDetails></SurveyDetails>,
-        loader:({params}) => fetch(`http://localhost:5000/${params.id}`),
+        loader:({params}) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
         path: "price",
         element: <Pricing></Pricing>,
+      },
+      {
+        path:'votes/:id',
+        element:<Vote></Vote>,
+        loader:({params}) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
         path: "register",
@@ -65,6 +72,10 @@ export const router = createBrowserRouter([
         path: "manage-users",
         element: <ManageUsers></ManageUsers>,
       },
+      {
+        path:'view',
+        element:<View></View>
+      }
     ],
   },
 ]);

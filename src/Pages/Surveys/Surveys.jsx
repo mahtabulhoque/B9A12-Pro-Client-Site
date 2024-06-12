@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react';
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import Survey from "../Home/Featured/Survey";
+import Survey from "./Survey";
 
 const Surveys = () => {
   const [selectedCategory, setSelectedCategory] = useState('');

@@ -11,7 +11,8 @@ const CreateSurvey = () => {
     optionYes: '',
     optionNo: '',
     category: '',
-    deadline: ''
+    deadline: '',
+    timestamp: new Date().toISOString(),
   });
 
   const { mutateAsync } = useMutation({
@@ -32,7 +33,8 @@ const CreateSurvey = () => {
         optionYes: '',
         optionNo: '',
         category: '',
-        deadline: ''
+        deadline: '',
+        timestamp: new Date().toISOString(),
       });
     }
   });

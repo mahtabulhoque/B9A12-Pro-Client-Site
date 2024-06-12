@@ -11,7 +11,7 @@ const SurveyorMenu = () => {
                     Create Survey</NavLink>
             </li>
             <li>
-                <NavLink to="/dashboard/surveys">
+                <NavLink to="/dashboard/view">
                 <FaRegEye />
                   
                     View</NavLink>
