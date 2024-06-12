@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -34,7 +34,7 @@ const Surveys = () => {
 
   return (
     <>
-      <SectionTitle heading={"Most Voted Survey"} />
+      <SectionTitle heading={"Survey"} />
       <div className="mb-4 flex gap-4">
         <select
           value={selectedCategory}

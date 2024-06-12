@@ -14,6 +14,7 @@ import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Vote from "../Pages/Home/Featured/Vote";
 import View from "../Pages/DashBoard/Surveyor/View";
+import Update from "../Pages/DashBoard/Surveyor/Update";
 
 export const router = createBrowserRouter([
   {
@@ -75,7 +76,13 @@ export const router = createBrowserRouter([
       {
         path:'view',
         element:<View></View>
+      },
+      {
+        path: 'update/:id',
+        element: <Update></Update>,
+        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`)
       }
+      
     ],
   },
 ]);

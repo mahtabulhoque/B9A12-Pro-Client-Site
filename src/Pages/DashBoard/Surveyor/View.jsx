@@ -6,30 +6,30 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import SingleSurvey from './SingleSurvey';
 
-
-
 const View = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
-  const { data: surveys = [], isLoading, isError } = useQuery({
-    queryKey: ['survey', user?.email],
+  const { data: surveys = [], isLoading, error } = useQuery({
+    queryKey: ['surveys',user?.email],
     queryFn: async () => {
-      if (!user?.email) throw new Error('User email is not available');
-      const response = await axiosSecure.get(`/surveyor/${user.email}`);
+     
+      const response = await axiosSecure.get(`/surveys/${user.email}`);
       return response.data;
     },
-    enabled: !!user?.email,
+    
   });
+  console.log(surveys);
+  
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div className="loading">Loading...</div>; // Add a loading indicator
   }
 
-  if (isError) {
-    return <p>Error fetching data</p>;
+  if (error) {
+    return <p>Error: {error.message || 'An error occurred while fetching data'}</p>;
   }
-
+  
   return (
     <div>
       <h2 className="text-[30px] lg:text-[40px] font-extrabold text-center text-green-600 py-10">

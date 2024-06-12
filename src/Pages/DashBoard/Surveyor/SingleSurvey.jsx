@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 
 const SingleSurvey = ({survey}) => {
     
 
-    const { title, category, deadline, description,voteCount,timestamp } = survey;
+    const { title, category, deadline, description,voteCount,timestamp,_id } = survey;
     console.log(survey);
     
     return (
@@ -14,7 +15,9 @@ const SingleSurvey = ({survey}) => {
             <p>Deadline: {deadline}</p>
             <p>VoteCount: {voteCount}</p>
             <p>Creation: {timestamp}</p>
-  
+             <Link to={`dashboard/update/${_id}`}>
+             <button className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-blue-600" >Update</button>
+             </Link>    
           </div>
         </div>
       );

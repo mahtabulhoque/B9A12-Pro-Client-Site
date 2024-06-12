@@ -7,7 +7,7 @@ const LatestSurvey = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data: latestSurveys = [], isLoading, error } = useQuery({
-    queryKey: ['survey'],
+    queryKey: ['survey', 'latest'],
     queryFn: async () => {
       try {
         const { data } = await axiosSecure.get('/survey?filterType=latest');
@@ -31,19 +31,13 @@ const LatestSurvey = () => {
     return <div>No latest surveys found</div>;
   }
 
-  // Sort surveys by creation timestamp in descending order
-  const sortedSurveys = latestSurveys.sort(
-    (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-  );
-
   // Display only the first 6 surveys
-  const latestSixSurveys = sortedSurveys.slice(0, 6);
+  const latestSixSurveys = latestSurveys.slice(0, 6);
 
   return (
     <>
       <SectionTitle heading={"Latest Survey"} />
       <div className="grid md:grid-cols-3 gap-4 p-4">
-        {/* Map through the latest surveys and return LatestCard component for each */}
         {latestSixSurveys.map((survey) => (
           <LatestCard key={survey._id} survey={survey} />
         ))}

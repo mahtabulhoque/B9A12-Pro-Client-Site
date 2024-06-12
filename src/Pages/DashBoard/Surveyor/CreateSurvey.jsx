@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Providers/AuthProvider';
 
 const CreateSurvey = () => {
+  const {user}= useContext(AuthContext)
   const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
+    name:user.displayName,
+    surveyor_email:user.email,
     title: '',
     description: '',
     optionYes: '',
@@ -28,6 +32,8 @@ const CreateSurvey = () => {
         confirmButtonText: 'OK'
       });
       setFormData({
+        name:user.displayName,
+        surveyor_email:user.email,
         title: '',
         description: '',
         optionYes: '',
