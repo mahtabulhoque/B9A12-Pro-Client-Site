@@ -13,8 +13,8 @@ const SideBar = () => {
   return (
     <div className="flex">
     {/* dashboard side bar */}
-    <div className="w-64 min-h-screen bg-blue-500">
-        <ul className="menu p-4">
+    <div className="w-64 min-h-screen bg-blue-500 ">
+        <ul className="menu p-4 font-bold text-white text-md lg:text-lg">
             <li>
                 <NavLink to="/dashboard" end>
                 <FaCreativeCommons />

@@ -32,9 +32,10 @@ const View = () => {
   
   return (
     <div>
-      <h2 className="text-[30px] lg:text-[40px] font-extrabold text-center text-green-600 py-10">
+      <h2 className="text-[30px] lg:text-[40px] font-extrabold text-center text-gray-600 py-10">
         My Surveys
       </h2>
+
       <div className="grid md:grid-cols-2 gap-4">
         {surveys.length === 0 ? (
           <h1 className="text-center text-2xl m-10">No data added</h1>
@@ -43,8 +44,8 @@ const View = () => {
             <SingleSurvey key={survey._id} survey={survey} />
           ))
         )}
+        </div>
       </div>
-    </div>
   );
 };
 

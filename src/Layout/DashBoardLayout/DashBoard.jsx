@@ -4,9 +4,9 @@ import SideBar from "../../Components/DashBoard/SideBar";
 
 const DashBoard = () => {
   return (
-    <div className="flex">
+    <div className=" max-w-[1440px] flex">
       {/* sidebar */}
-     <div className="flex-1">
+     <div className="flex-1 ml-2 py-6">
      <SideBar></SideBar>
      </div>
 

@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
     const currentUser = {
       email: user.email,
       name:user.name,
-      role: "user",
+      role: "User",
       status: "Verified",
     };
     try {

@@ -1,44 +1,28 @@
-import { useState, useEffect } from 'react';
+import  { useState } from "react";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import useSurvey from "../../Hooks/useSurvey";
 import Survey from "./Survey";
 
 const Surveys = () => {
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [sortOrder, setSortOrder] = useState('asc');
-  const [filteredSurveys, setFilteredSurveys] = useState([]);
-  const axiosSecure = useAxiosSecure();
+  const [filter, setFilter] = useState("");
+  const [sort, setSort] = useState("");
+  const [surveys] = useSurvey(filter, sort);
 
-  const { data: surveys = [] } = useQuery({
-    queryKey: ['survey'],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get('/survey');
-      return data;
-    }
-  });
+  const handleFilter = (e) => {
+    setFilter(e.target.value);
+  };
 
-  useEffect(() => {
-    let updatedSurveys = selectedCategory === '' 
-      ? surveys 
-      : surveys.filter(survey => survey.category === selectedCategory);
-
-    if (sortOrder === 'asc') {
-      updatedSurveys = updatedSurveys.sort((a, b) => a.votes - b.votes);
-    } else if (sortOrder === 'desc') {
-      updatedSurveys = updatedSurveys.sort((a, b) => b.votes - a.votes);
-    }
-
-    setFilteredSurveys(updatedSurveys);
-  }, [selectedCategory, sortOrder, surveys]);
+  const handleSort = (e) => {
+    setSort(e.target.value);
+  };
 
   return (
     <>
       <SectionTitle heading={"Survey"} />
-      <div className="mb-4 flex gap-4">
+      <div className="mb-4 flex justify-center gap-4">
         <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          value={filter}
+          onChange={handleFilter}
           className="p-2 border border-gray-300 rounded"
         >
           <option value="">Select a category</option>
@@ -50,22 +34,19 @@ const Surveys = () => {
         </select>
 
         <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
+          value={sort}
+          onChange={handleSort}
           className="p-2 border border-gray-300 rounded"
         >
-          <option value="asc">Sort by votes: Ascending</option>
-          <option value="desc">Sort by votes: Descending</option>
+          <option value="">Sort by votes</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
       </div>
-      <div className="grid md:grid-cols-3 gap-4 p-4">
-        {filteredSurveys.length > 0 ? (
-          filteredSurveys.map(survey => (
-            <Survey key={survey._id} survey={survey} />
-          ))
-        ) : (
-          <p>No surveys available in this category</p>
-        )}
+      <div className="max-w-[1440px] mx-auto grid md:grid-cols-3 gap-4 p-4">
+        {surveys.map((survey) => (
+          <Survey key={survey._id} survey={survey} />
+        ))}
       </div>
     </>
   );

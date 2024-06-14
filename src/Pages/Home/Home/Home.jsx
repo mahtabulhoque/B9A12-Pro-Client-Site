@@ -15,11 +15,18 @@ const Home = () => {
             <Helmet>
                 <title>Pro Survey | Home</title>
             </Helmet>
+           <div className="my-6">
            <Banner></Banner>
+           </div>
+           <div className="max-w-[1440px] mx-auto">
            <Featured></Featured>
+           </div>
+           <div className="max-w-[1440px] mx-auto">
            <LatestSurvey></LatestSurvey>
+           </div>
            <Work></Work>
            <Faq></Faq>
+          
         </div>
     );
 };

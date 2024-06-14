@@ -15,35 +15,42 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Vote from "../Pages/Home/Featured/Vote";
 import View from "../Pages/DashBoard/Surveyor/View";
 import Update from "../Pages/DashBoard/Surveyor/Update";
+import UserSurvey from "../Pages/DashBoard/User/UserSurvey";
+import MyReports from "../Pages/DashBoard/User/MyReports";
+import Comments from "../Pages/DashBoard/User/Comments";
+import Payment from "../Pages/Pricing/Payment";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement:<ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home></Home>,
       },
-
       {
         path: "surveys",
         element: <Surveys></Surveys>,
       },
       {
-        path: "/survey/:id",
+        path: "survey/:id",
         element: <SurveyDetails></SurveyDetails>,
-        loader:({params}) => fetch(`http://localhost:5000/survey/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
         path: "price",
         element: <Pricing></Pricing>,
       },
       {
-        path:'votes/:id',
-        element:<Vote></Vote>,
-        loader:({params}) => fetch(`http://localhost:5000/survey/${params.id}`),
+        path: "pay",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "votes/:id",
+        element: <Vote></Vote>,
+        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
         path: "register",
@@ -55,15 +62,14 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "dashboard",
     element: <DashBoard></DashBoard>,
-    errorElement:<ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        index:true,
-        element: <Common></Common>
+        index: true,
+        element: <Common></Common>,
       },
       {
         path: "create",
@@ -74,15 +80,26 @@ export const router = createBrowserRouter([
         element: <ManageUsers></ManageUsers>,
       },
       {
-        path:'view',
-        element:<View></View>
+        path: "view",
+        element: <View></View>,
       },
       {
-        path: 'update/:id',
+        path: "view/update/:id",
         element: <Update></Update>,
-        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`)
-      }
-      
+        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
+      },
+      {
+        path: "user-survey",
+        element:<UserSurvey></UserSurvey> ,
+      },
+      {
+        path: "reported-survey",
+        element:<MyReports></MyReports>,
+      },
+      {
+        path: "survey-comment",
+        element:<Comments></Comments> ,
+      },
     ],
   },
 ]);
