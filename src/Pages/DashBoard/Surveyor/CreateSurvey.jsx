@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Providers/AuthProvider';
 
 const CreateSurvey = () => {
-  const {user}= useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
-    name:user.displayName,
-    surveyor_email:user.email,
+    name: user.displayName,
+    surveyor_email: user.email,
     title: '',
     description: '',
     optionYes: '',
@@ -17,6 +17,7 @@ const CreateSurvey = () => {
     category: '',
     deadline: '',
     timestamp: new Date().toISOString(),
+    questions: [] // Array to store questions
   });
 
   const { mutateAsync } = useMutation({
@@ -32,8 +33,8 @@ const CreateSurvey = () => {
         confirmButtonText: 'OK'
       });
       setFormData({
-        name:user.displayName,
-        surveyor_email:user.email,
+        name: user.displayName,
+        surveyor_email: user.email,
         title: '',
         description: '',
         optionYes: '',
@@ -41,6 +42,7 @@ const CreateSurvey = () => {
         category: '',
         deadline: '',
         timestamp: new Date().toISOString(),
+        questions: [] // Reset questions after submission
       });
     }
   });
@@ -50,6 +52,22 @@ const CreateSurvey = () => {
     setFormData({
       ...formData,
       [name]: value
+    });
+  };
+
+  const handleQuestionChange = (index, value) => {
+    const newQuestions = [...formData.questions];
+    newQuestions[index] = value;
+    setFormData({
+      ...formData,
+      questions: newQuestions
+    });
+  };
+
+  const addQuestionField = () => {
+    setFormData({
+      ...formData,
+      questions: [...formData.questions, ''] // Add an empty string for a new question
     });
   };
 
@@ -164,6 +182,33 @@ const CreateSurvey = () => {
               required
             />
           </div>
+        </div>
+
+        {/* Question Fields */}
+        <div className="grid grid-cols-1 gap-4">
+          {formData.questions.map((question, index) => (
+            <div key={index}>
+              <label htmlFor={`question-${index}`} className="block text-sm font-medium text-gray-700">
+                Question {index + 1}
+              </label>
+              <input
+                id={`question-${index}`}
+                name={`question-${index}`}
+                type="text"
+                value={question}
+                onChange={(e) => handleQuestionChange(index, e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addQuestionField}
+            className="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            Add Question
+          </button>
         </div>
 
         <div className="flex justify-end">

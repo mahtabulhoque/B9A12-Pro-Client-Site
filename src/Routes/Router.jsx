@@ -90,15 +90,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "user-survey",
-        element:<UserSurvey></UserSurvey> ,
+        element: <UserSurvey></UserSurvey>,
       },
       {
         path: "reported-survey",
-        element:<MyReports></MyReports>,
+        element: <MyReports></MyReports>,
       },
       {
         path: "survey-comment",
-        element:<Comments></Comments> ,
+        element: <Comments></Comments>,
       },
     ],
   },
