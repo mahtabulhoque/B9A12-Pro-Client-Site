@@ -27,7 +27,7 @@ const MyReports = () => {
    
     return (
         <>
-          <SectionTitle heading={"Comments"} />
+          <SectionTitle heading={"Report Survey"} />
           <div className="max-w-[1440px] mx-auto grid md:grid-cols-2 gap-4 p-4">
         {data.map((survey) => (
           <Report key={survey._id} survey={survey} />

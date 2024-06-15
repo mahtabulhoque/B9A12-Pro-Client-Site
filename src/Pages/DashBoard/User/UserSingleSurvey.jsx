@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { FaEye, FaClipboardList, FaTimes, FaPaperPlane } from "react-icons/fa"; // Importing icons
 
 const UserSingleSurvey = ({ survey }) => {
   const { title, category, description, _id, voteCount } = survey;
@@ -108,16 +109,16 @@ const UserSingleSurvey = ({ survey }) => {
         </div>
         <div className="card-actions">
           <Link to={`/survey/${_id}`}>
-            <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-blue-700 hover:bg-green-500 text-white">
-              View Details
-            </button>
+            <FaEye
+              className="text-gray-700 hover:text-blue-500 text-2xl cursor-pointer"
+              title="View Details"
+            />
           </Link>
-          <button
-            className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-amber-500 hover:bg-red-700 text-white"
+          <FaClipboardList
+            className="text-blue-500 hover:text-green-700 text-2xl cursor-pointer"
+            title="Participate in Survey"
             onClick={handleOpenModal}
-          >
-            Participate in Survey
-          </button>
+          />
         </div>
       </div>
 
@@ -128,30 +129,15 @@ const UserSingleSurvey = ({ survey }) => {
 
           <div className="modal-container bg-white w-full sm:w-96 mx-auto rounded-lg z-50 overflow-y-auto">
             {/* Modal Header */}
-            <div className="modal-header px-4 py-3 bg-gray-200 rounded-t-lg">
+            <div className="modal-header px-4 py-3 bg-gray-200 rounded-t-lg flex justify-between items-center">
               <h2 className="text-xl font-bold text-gray-800">
                 Survey Questions
               </h2>
-              <button
-                className="modal-close ml-auto focus:outline-none"
+              <FaTimes
+                className="text-gray-800 text-2xl cursor-pointer"
                 onClick={handleCloseModal}
                 aria-label="Close modal"
-              >
-                <svg
-                  className="w-6 h-6 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </svg>
-              </button>
+              />
             </div>
 
             {/* Modal Body */}
@@ -190,20 +176,18 @@ const UserSingleSurvey = ({ survey }) => {
             </div>
 
             {/* Modal Footer */}
-            <div className="modal-footer px-4 py-3 bg-gray-200 rounded-b-lg">
-              <button
-                className="btn btn-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 focus:outline-none"
+            <div className="modal-footer px-4 py-3 bg-gray-200 rounded-b-lg flex justify-end">
+              <FaTimes
+                className="text-gray-800 text-2xl cursor-pointer mr-4"
+                title="Cancel"
                 onClick={handleCloseModal}
-              >
-                Cancel
-              </button>
-              <button
-                className="btn btn-sm bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded focus:outline-none"
+              />
+              <FaPaperPlane
+                className={`text-cyan-500 hover:text-cyan-600 text-2xl cursor-pointer ${!allQuestionsAnswered() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                title="Submit"
                 onClick={handleSubmitSurvey}
                 disabled={!allQuestionsAnswered()}
-              >
-                Submit
-              </button>
+              />
             </div>
           </div>
         </div>
