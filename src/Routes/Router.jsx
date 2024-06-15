@@ -26,6 +26,7 @@ import ResponsePayment from "../Pages/DashBoard/Admin/ResponsePayment";
 import AdminRoutes from "./AdminRoutes";
 import TotalSurveys from "../Pages/DashBoard/Admin/TotalSurveys";
 import TotalVotes from "../Pages/DashBoard/Admin/TotalVotes";
+import ProUserRoutes from "./ProUserRoutes";
 
 
 
@@ -82,7 +83,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "create",
-        element: <SurveyorRoutes><CreateSurvey></CreateSurvey></SurveyorRoutes>,
+        element: <PrivateRoutes><SurveyorRoutes><CreateSurvey></CreateSurvey></SurveyorRoutes></PrivateRoutes>,
       },
       {
         path: "manage-users",
@@ -90,23 +91,24 @@ export const router = createBrowserRouter([
       },
       {
         path: "payment-response",
-        element: <ResponsePayment></ResponsePayment>,
+        element: <PrivateRoutes><AdminRoutes><ResponsePayment></ResponsePayment></AdminRoutes></PrivateRoutes>,
       },
       {
         path: "all-vote",
-        element: <TotalVotes></TotalVotes>,
+        element: <PrivateRoutes><AdminRoutes><TotalVotes></TotalVotes></AdminRoutes></PrivateRoutes>,
       },
       {
         path: "surveys",
-        element: <TotalSurveys></TotalSurveys>,
+        element: <PrivateRoutes><AdminRoutes><TotalSurveys></TotalSurveys></AdminRoutes></PrivateRoutes>,
       },
       {
         path: "view",
-        element:<View></View>,
+        element:
+        <PrivateRoutes><SurveyorRoutes><View></View></SurveyorRoutes></PrivateRoutes>,
       },
       {
         path: "view/update/:id",
-        element: <SurveyorRoutes><Update></Update></SurveyorRoutes>,
+        element: <PrivateRoutes><SurveyorRoutes><Update></Update></SurveyorRoutes></PrivateRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
@@ -115,11 +117,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "reported-survey",
-        element:<MyReports></MyReports>,
+        element:<PrivateRoutes><ProUserRoutes><MyReports></MyReports></ProUserRoutes></PrivateRoutes>,
       },
       {
         path: "survey-comment",
-        element: <Comments></Comments>,
+        element:
+        <PrivateRoutes><ProUserRoutes><Comments></Comments></ProUserRoutes></PrivateRoutes>,
       },
      
     ],
