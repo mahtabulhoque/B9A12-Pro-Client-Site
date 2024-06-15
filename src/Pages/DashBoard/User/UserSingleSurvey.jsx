@@ -183,7 +183,7 @@ const UserSingleSurvey = ({ survey }) => {
                 onClick={handleCloseModal}
               />
               <FaPaperPlane
-                className={`text-cyan-500 hover:text-cyan-600 text-2xl cursor-pointer ${!allQuestionsAnswered() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`text-green-800 hover:text-cyan-600 text-2xl cursor-pointer ${!allQuestionsAnswered() ? 'opacity-50 cursor-not-allowed' : ''}`}
                 title="Submit"
                 onClick={handleSubmitSurvey}
                 disabled={!allQuestionsAnswered()}

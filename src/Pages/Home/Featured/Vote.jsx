@@ -45,42 +45,43 @@ const { mutateAsync } = useMutation({
     optionYes,_id } = survey || {};
     console.log(survey);
 
-  const handleVoteSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const comment = form.comment ? form.comment.value : "";
-    const voter_email = user?.email;
-    const voter_name = user?.displayName;
-  
-    const totalVote = parseInt(survey?.voteCount);
-    const voteCount = parseInt(0);
-    const voter = {
-      voter_email,
-      voter_name,
-      
-    };
-
-    try {
-      const voteSurveyData = {
-        voteId: _id,
-        voter,
-        voteOption,
-        comment,
-        voteCount,
-        totalVote,
-        title, category, deadline, description, optionNo,
-    optionYes,
+    const handleVoteSubmit = async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const comment = form.comment ? form.comment.value : "";
+      const voter_email = user?.email;
+      const voter_name = user?.displayName;
+    
+      const voter = {
+        voter_email,
+        voter_name,
       };
-
-      console.log("Survey Data:", voteSurveyData);
-
-      // Post data in backend
-      await mutateAsync(voteSurveyData);
-
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+    
+      try {
+        const voteSurveyData = {
+          voteId: _id,
+          voter,
+          voteOption,
+          comment,
+          voteCount: survey.voteCount + 1,  // Increment voteCount
+          totalVote: survey.totalVote + 1,  // Increment totalVote
+          title,
+          category,
+          deadline,
+          description,
+          optionNo,
+          optionYes,
+        };
+    
+        console.log("Survey Data:", voteSurveyData);
+    
+        // Post data to backend
+        await mutateAsync(voteSurveyData);
+    
+      } catch (error) {
+        console.error("Error submitting vote:", error);
+      }
+    };
 
   return (
     <div className="w-full h-full mt-12 md:20 lg:mt-24">
@@ -93,7 +94,7 @@ const { mutateAsync } = useMutation({
           </div>
 
           <h3 className="text-xl font-semibold my-3">
-            Are you positive about the above?
+            Are you positive about this Survey?
           </h3>
 
           <div className="mt-16">

@@ -1,4 +1,4 @@
-import  { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../../Providers/AuthProvider';
 
@@ -64,7 +64,7 @@ const Report = ({ survey }) => {
         ]);
 
         // Increment report count
-        setReportCount(reportCount);
+        setReportCount(reportCount + 1); // Increment by 1 after successful report
       } else {
         console.error('Failed to post report');
       }
@@ -118,7 +118,7 @@ const Report = ({ survey }) => {
         </div>
 
         {/* Show message if report limit reached */}
-        {reportCount >= 2 && <p className="text-red-500 mt-2">Report limit reached for this survey.</p>}
+        {reportCount >= 1 && <p className="text-red-500 mt-2">Report limit reached for this survey.</p>}
       </div>
     </div>
   );

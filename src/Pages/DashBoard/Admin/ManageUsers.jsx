@@ -18,7 +18,7 @@ const ManageUsers = () => {
       return data; // Ensure the data is returned
     },
   });
-  console.log(users);
+  
 
   if (isLoading) {
     return <div>Loading...</div>;

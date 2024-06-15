@@ -7,6 +7,7 @@ import Pricing from "../Pages/Pricing/Pricing";
 import Register from "../Pages/Register/Register";
 import LogIn from "../Pages/LogIn/LogIn";
 import DashBoard from "../Layout/DashBoardLayout/DashBoard";
+import PrivateRoutes from"../Routes/PrivateRoutes"
 
 import CreateSurvey from "../Pages/DashBoard/Surveyor/CreateSurvey";
 import Common from "../Pages/DashBoard/User/Common";
@@ -19,6 +20,14 @@ import UserSurvey from "../Pages/DashBoard/User/UserSurvey";
 import MyReports from "../Pages/DashBoard/User/MyReports";
 import Comments from "../Pages/DashBoard/User/Comments";
 import Payment from "../Pages/Pricing/Payment";
+// import ProUserRoutes from "../Routes/ProUserRoutes";
+import SurveyorRoutes from "../Routes/SurveyorRoutes";
+import ResponsePayment from "../Pages/DashBoard/Admin/ResponsePayment";
+import AdminRoutes from "./AdminRoutes";
+import TotalSurveys from "../Pages/DashBoard/Admin/TotalSurveys";
+import TotalVotes from "../Pages/DashBoard/Admin/TotalVotes";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +58,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "votes/:id",
-        element: <Vote></Vote>,
+        element: <PrivateRoutes><Vote></Vote></PrivateRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
@@ -73,19 +82,31 @@ export const router = createBrowserRouter([
       },
       {
         path: "create",
-        element: <CreateSurvey></CreateSurvey>,
+        element: <SurveyorRoutes><CreateSurvey></CreateSurvey></SurveyorRoutes>,
       },
       {
         path: "manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: <AdminRoutes><ManageUsers></ManageUsers></AdminRoutes>,
+      },
+      {
+        path: "payment-response",
+        element: <ResponsePayment></ResponsePayment>,
+      },
+      {
+        path: "all-vote",
+        element: <TotalVotes></TotalVotes>,
+      },
+      {
+        path: "surveys",
+        element: <TotalSurveys></TotalSurveys>,
       },
       {
         path: "view",
-        element: <View></View>,
+        element:<View></View>,
       },
       {
         path: "view/update/:id",
-        element: <Update></Update>,
+        element: <SurveyorRoutes><Update></Update></SurveyorRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
       },
       {
@@ -94,12 +115,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "reported-survey",
-        element: <MyReports></MyReports>,
+        element:<MyReports></MyReports>,
       },
       {
         path: "survey-comment",
         element: <Comments></Comments>,
       },
+     
     ],
   },
 ]);

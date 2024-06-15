@@ -19,11 +19,16 @@ const AdminMenu = () => {
                     Publish/unpublish</NavLink>
             </li> 
             <li>
-                <NavLink to="/dashboard/surveys">
+                <NavLink to="/dashboard/payment-response">
                 
                   
                 <MdPayments />
-                    Payments & Responses</NavLink>
+                    Payments</NavLink>
+            </li> 
+            <li>
+                <NavLink to="/dashboard/all-vote">
+                
+                    Responses</NavLink>
             </li> 
         </div>
     );

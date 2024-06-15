@@ -16,6 +16,7 @@ const CreateSurvey = () => {
     optionNo: '',
     category: '',
     deadline: '',
+    status: 'publish',
     timestamp: new Date().toISOString(),
     questions: [] // Array to store questions
   });
@@ -41,6 +42,7 @@ const CreateSurvey = () => {
         optionNo: '',
         category: '',
         deadline: '',
+        status: 'publish',
         timestamp: new Date().toISOString(),
         questions: [] // Reset questions after submission
       });
