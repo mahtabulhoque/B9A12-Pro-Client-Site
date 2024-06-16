@@ -17,7 +17,7 @@ const Vote = () => {
 
     
   const survey = useLoaderData();
-  console.log(survey);
+  
   const { user } = useContext(AuthContext)
   const navigate = useNavigate();
   const [voteOption, setVoteOption] = useState("");
@@ -43,7 +43,7 @@ const { mutateAsync } = useMutation({
 
   const { title, category, deadline, description, optionNo,
     optionYes,_id } = survey || {};
-    console.log(survey);
+    
 
     const handleVoteSubmit = async (e) => {
       e.preventDefault();
@@ -73,7 +73,7 @@ const { mutateAsync } = useMutation({
           optionYes,
         };
     
-        console.log("Survey Data:", voteSurveyData);
+        
     
         // Post data to backend
         await mutateAsync(voteSurveyData);

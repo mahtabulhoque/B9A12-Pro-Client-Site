@@ -1,19 +1,19 @@
-import  { useState } from "react";
+import { useState } from "react";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useSurvey from "../../Hooks/useSurvey";
 import Survey from "./Survey";
 
 const Surveys = () => {
-  const [filter, setFilter] = useState("");
-  const [sort, setSort] = useState("");
-  const [surveys] = useSurvey(filter, sort);
+  const [filter, setFilter] = useState("");  // State to hold filter value
+  const [sort, setSort] = useState("");      // State to hold sort value
+  const [surveys] = useSurvey(filter, sort); // Fetch surveys based on filter and sort
 
   const handleFilter = (e) => {
-    setFilter(e.target.value);
+    setFilter(e.target.value);  // Update filter state based on select input
   };
 
   const handleSort = (e) => {
-    setSort(e.target.value);
+    setSort(e.target.value);    // Update sort state based on select input
   };
 
   return (

@@ -3,7 +3,7 @@
 
 const MostVoted = ({survey}) => {
     const { title, category, deadline, description,voteCount,timestamp } = survey;
-    console.log(survey);
+   
     return (
       <div className="card w-full bg-base-100 shadow-xl">
         <div className="card-body items-center text-center">

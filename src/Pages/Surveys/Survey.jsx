@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Survey = ({ survey }) => {
   const { title, category, description, _id,voteCount } = survey;
-  console.log(survey);
+
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body items-center text-center">

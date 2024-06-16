@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000/',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+  baseURL: "https://b9a12-assignment-project.vercel.app",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 const useAxiosSecure = () => {
-    return axiosSecure;
+  return axiosSecure;
 };
 
 export default useAxiosSecure;
