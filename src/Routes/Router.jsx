@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       {
         path: "survey/:id",
         element: <SurveyDetails></SurveyDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
+        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/survey/${params.id}`),
       },
       {
         path: "price",
@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
       {
         path: "votes/:id",
         element: <PrivateRoutes><Vote></Vote></PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
+        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/votes/${params.id}`),
       },
       {
         path: "register",
@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "payment-response",
-        element: <PrivateRoutes><AdminRoutes><ResponsePayment></ResponsePayment></AdminRoutes></PrivateRoutes>,
+        element:<AdminRoutes><ResponsePayment></ResponsePayment></AdminRoutes>,
       },
       {
         path: "all-vote",
@@ -109,7 +109,7 @@ export const router = createBrowserRouter([
       {
         path: "view/update/:id",
         element: <PrivateRoutes><SurveyorRoutes><Update></Update></SurveyorRoutes></PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:5000/survey/${params.id}`),
+        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/survey/${params.id}`),
       },
       {
         path: "user-survey",

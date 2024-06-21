@@ -75,7 +75,7 @@ const SideBar = () => {
           {/* User Menu */}
           {role === 'User' && <UserMenu closeSidebar={closeSidebar} />}
           {/* Pro User */}
-          {role === 'Pro-user' && <ProUserMenu closeSidebar={closeSidebar} />}
+          {role === 'Pro-User' && <ProUserMenu closeSidebar={closeSidebar} />}
           <div className="divider"></div>
           <li>
             <NavLink to="/" onClick={closeSidebar}>

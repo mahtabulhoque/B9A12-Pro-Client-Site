@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import registrationImage from "../../../public/registration.jpg"; // Adjust the import path based on your project structure
 import { Helmet } from "react-helmet-async";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -15,8 +15,15 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, update } = useContext(AuthContext);
+  const { createUser, update,user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+    
+  useEffect(()=>{
+    if(user){
+      navigate('/')
+    }
+  },[navigate,user])
 
   const validatePassword = (value) => {
     return value.length >= 8 && /[A-Z]/.test(value) && /[0-9]/.test(value);

@@ -15,14 +15,17 @@ import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 const LogIn = () => {
   const axiosPublic = UseAxiosPublic();
   const [disable, setDisable] = useState(true);
-  const { logIn, signInWithGoogle } = useContext(AuthContext);
+  const { logIn, signInWithGoogle,user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
     loadCaptchaEnginge(6);
-  }, []);
+  }, [navigate, user]);
 
   const handleLogin = async (event) => {
     event.preventDefault();

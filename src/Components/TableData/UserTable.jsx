@@ -65,7 +65,7 @@ const UserTable = ({ user, refetch }) => {
       {dropdownVisible && (
         <div className="absolute bg-white border border-gray-300 rounded-md mt-2 shadow-lg z-10">
           <ul className="list-none p-2">
-            {['Admin', 'User', 'Surveyor', 'Pro User'].map((role) => (
+            {['Admin', 'User', 'Surveyor', 'Pro-User'].map((role) => (
               <li
                 key={role}
                 onClick={() => handleRoleChange(role)}

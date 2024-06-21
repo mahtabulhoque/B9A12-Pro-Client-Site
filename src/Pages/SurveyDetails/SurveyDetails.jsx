@@ -12,7 +12,7 @@ const SurveyDetails = () => {
     queryKey: ['survey', id],
     queryFn: async () => {
       try {
-        const response = await axiosSecure.get(`http://localhost:5000/survey/${id}`);
+        const response = await axiosSecure.get(`https://b9a12-assignment-project.vercel.app/survey/${id}`);
         setData(response.data);
         return response.data;
       } catch (error) {
