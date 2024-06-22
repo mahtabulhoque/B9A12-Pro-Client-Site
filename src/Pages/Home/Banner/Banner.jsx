@@ -17,7 +17,7 @@ const Banner = () => {
   return (
     <Carousel>
       {slides.map((slide, index) => (
-        <div key={index} className="relative h-[800px]">
+        <div key={index} className="relative  h-[300px] lg:h-[800px]">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${slide.src})` }}

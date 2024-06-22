@@ -15,7 +15,7 @@ const Home = () => {
             <Helmet>
                 <title>Pro Survey | Home</title>
             </Helmet>
-           <div className="my-6">
+           <div className="my-4 mb-6">
            <Banner></Banner>
            </div>
            <div className="max-w-[1440px] mx-auto">
