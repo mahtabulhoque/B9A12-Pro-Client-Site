@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
 const SurveyDetails = () => {
-  const { id } = useParams(); // Use useParams to get the survey ID from the URL
+  const { id } = useParams();
   const [data, setData] = useState([]);
   const axiosSecure = useAxiosSecure();
   
@@ -33,7 +33,7 @@ const SurveyDetails = () => {
     return <p>No survey data available</p>;
   }
 
-  const { title, category, deadline, description,_id} = data;
+  const { title, category, deadline, description,_id,voteCount} = data;
 
   return (
     <div className="card w-full bg-base-100 shadow-xl">
@@ -42,6 +42,7 @@ const SurveyDetails = () => {
         <p>Category: {category}</p>
         <p>Description: {description}</p>
         <p>Deadline: {deadline}</p>
+        <p>Vote: {voteCount}</p>
         <div className="card-actions">
          <Link to={`/votes/${_id}`}>
          <button className="btn btn-primary">Vote</button>

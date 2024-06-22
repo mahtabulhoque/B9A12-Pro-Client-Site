@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "pay",
-        element: <Payment></Payment>,
+        element: <PrivateRoutes><Payment></Payment></PrivateRoutes>,
       },
       {
         path: "votes/:id",
@@ -117,7 +117,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "reported-survey",
-        element:<PrivateRoutes><ProUserRoutes><MyReports></MyReports></ProUserRoutes></PrivateRoutes>,
+        element:<PrivateRoutes><MyReports></MyReports></PrivateRoutes>,
       },
       {
         path: "survey-comment",

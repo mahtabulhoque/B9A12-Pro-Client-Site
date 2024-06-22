@@ -130,23 +130,6 @@ const { mutateAsync } = useMutation({
                   />
                 </div>
               </div>
-              {/* {isProUser ? (
-                <div className="mt-8">
-                  <label className="text-lg font-semibold" htmlFor="comment">
-                    Add Your Comment
-                  </label>
-                  <textarea
-                    id="comment"
-                    name="comment"
-                    placeholder="Bio"
-                    className="textarea text-blue-500 textarea-bordered row-span-2 w-full"
-                  ></textarea>
-                </div>
-              ) : (
-                <div className="mt-8 text-lg font-semibold">
-                  Only Pro User Can Comment Here...
-                </div>
-              )} */}
 
               <br />
               <input

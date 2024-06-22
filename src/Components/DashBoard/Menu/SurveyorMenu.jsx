@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { IoCreateOutline} from "react-icons/io5";
-import { FaRegEye} from "react-icons/fa";
+import { GrDocumentUpdate } from "react-icons/gr";
 
 const SurveyorMenu = () => {
     return (
@@ -12,9 +12,9 @@ const SurveyorMenu = () => {
             </li>
             <li>
                 <NavLink to="/dashboard/view">
-                <FaRegEye />
+                <GrDocumentUpdate />
                   
-                    View</NavLink>
+                    View & Update</NavLink>
             </li>
         </div>
     );
