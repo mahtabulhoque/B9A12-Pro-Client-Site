@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosPublic from "./UseAxiosPublic";
 
 
-const useSurveys = (filter, sort) => {
+const useSurveys = (category, sort) => {
   const axiosPublic = UseAxiosPublic();
 
 
   const { data: surveys = [], isLoading, refetch } = useQuery({
-      queryKey: ['surveys', filter, sort],
+      queryKey: ['surveys-filter',category, sort],
       queryFn: async () => {
-          const { data } = await axiosPublic.get(`surveys?filter=${filter}&sort=${sort}`)
+          const { data } = await axiosPublic.get(`surveys-filter?category=${category}&&sort=${sort}`)
           return data
       },
   })

@@ -3,11 +3,6 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 
 import { useMutation } from "@tanstack/react-query";
-
-// import toast from "react-hot-toast";
-
-// import vote from "../../assets/images/vote.png";
-// import useProUser from "../../hooks/useProUser";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -17,6 +12,7 @@ const Vote = () => {
 
     
   const survey = useLoaderData();
+  console.log(survey);
   
   const { user } = useContext(AuthContext)
   const navigate = useNavigate();
@@ -51,11 +47,14 @@ const { mutateAsync } = useMutation({
       const comment = form.comment ? form.comment.value : "";
       const voter_email = user?.email;
       const voter_name = user?.displayName;
-    
+      const totalVote = parseInt(survey?.voteCount);
+     const voteCount = parseInt(0);
+     console.log(totalVote,voteCount);
       const voter = {
         voter_email,
         voter_name,
       };
+      
     
       try {
         const voteSurveyData = {
@@ -63,15 +62,16 @@ const { mutateAsync } = useMutation({
           voter,
           voteOption,
           comment,
-          voteCount: survey.voteCount + 1,  // Increment voteCount
-          totalVote: survey.totalVote + 1,  // Increment totalVote
+          voteCount,
           title,
           category,
           deadline,
           description,
           optionNo,
           optionYes,
+          totalVote,
         };
+        console.log(voteSurveyData);
     
         
     

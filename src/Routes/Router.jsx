@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       {
         path: "survey/:id",
         element: <SurveyDetails></SurveyDetails>,
-        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/survey/${params.id}`),
+        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/${params.id}`),
       },
       {
         path: "price",
@@ -60,7 +60,8 @@ export const router = createBrowserRouter([
       {
         path: "votes/:id",
         element: <PrivateRoutes><Vote></Vote></PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/votes/${params.id}`),
+        loader: ({ params }) => fetch(`https://b9a12-assignment-project.vercel.app/survey/${params.id}`),
+
       },
       {
         path: "register",
